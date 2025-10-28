@@ -1,0 +1,107 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: elvina.suvorova
+      changes:
+        - createTable:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2
+      author: elvina.suvorova
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(100)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 3
+      author: elvina.suvorova
+      changes:
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+              - column:
+                  name: role_id
+                  type: bigint
+  - changeSet:
+      id: 4
+      author: elvina.suvorova
+      change:
+        - addForeignKeyConstraint:
+            baseColumNames: user_id
+            baseTableName: user_roles
+            constraintName: fk_user_roles_user
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumNames: id
+            referencedTableName: users
+  - changeSet:
+      id: 5
+      author: elvina.suvorova
+      change:
+        - addForeignKeyConstraint:
+            baseColumNames: role_id
+            baseTableName: user_roles
+            constraintName: fk_user_roles_roles
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumNames: id
+            referencedTableName: roles
+  - changeSet:
+      id: 6
+      author: elvina.suvorova
+      change:
+        - insert:
+            tableNames: roles
+            columns:
+              - column:
+                name: name
+                value: ROLE_USER
+              - column:
+                name: name
+                value: ROLE_ADMIN
