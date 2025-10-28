@@ -1,7 +1,6 @@
 package com.example.bankcards.service;
 
 import com.example.bankcards.dto.CardDto;
-import com.example.bankcards.entity.Card;
 
 import java.util.List;
 

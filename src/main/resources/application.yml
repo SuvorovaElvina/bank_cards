@@ -7,8 +7,13 @@ server:
 
 jwt:
   token:
-    secret: jjwtrestapplicationspecialsecret
+    secret:
     expired: 3600000
+
+logging:
+  file:
+    name: app.log
+
 spring:
   jpa:
     hibernate:
@@ -22,12 +27,12 @@ spring:
       mode: always
   liquibase:
     change-log: db/migration/changelog-master.yml
-    url: jdbc:postgresql://localhost:5432/bank-cards
-    user: postgres
-    password: iamroot
+    url: jdbc:postgresql://
+    user:
+    password:
 
   datasource:
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/bank-cards
-    username: postgres
-    password: iamroot
+    url: jdbc:postgresql://
+    username:
+    password:

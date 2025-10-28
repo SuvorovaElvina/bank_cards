@@ -39,7 +39,7 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth.requestMatchers(CREATE_ENDPOINT).permitAll()
                         .requestMatchers(LOGIN_ENDPOINT).permitAll()
-                        .requestMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
+                        .requestMatchers(ADMIN_ENDPOINT).hasRole("ADMIN_ROLE")
                         .anyRequest().authenticated())
                 .apply(new JwtConfigurer(jwtTokenProvider));
         return http.build();

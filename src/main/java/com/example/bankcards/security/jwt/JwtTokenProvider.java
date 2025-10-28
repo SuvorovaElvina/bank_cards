@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,6 +23,7 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Component
 public class JwtTokenProvider {
     @Value("${jwt.token.secret}")
@@ -45,6 +47,7 @@ public class JwtTokenProvider {
     }
 
     public String createToken(String login, List<Role> roles) {
+        log.debug(String.format("Создать токен для логина %s с ролями %s", login, roles));
         Claims claims = Jwts.claims().subject(login).add("roles", getRoleNames(roles)).build();
 
         Date now = new Date();
@@ -83,6 +86,7 @@ public class JwtTokenProvider {
 
             return !claims.getPayload().getExpiration().before(new Date());
         } catch (JwtException | IllegalArgumentException e) {
+            log.error("JWT token is expired or invalid");
             throw new JwtAuthenticationException("JWT token is expired or invalid");
         }
     }

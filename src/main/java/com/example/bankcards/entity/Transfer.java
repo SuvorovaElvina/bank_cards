@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "transfers")
 @Data
+@ToString
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Transfer {

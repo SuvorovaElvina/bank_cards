@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name = "users")
 @Data
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -27,6 +28,7 @@ public class User {
     String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @ToString.Exclude
     @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})

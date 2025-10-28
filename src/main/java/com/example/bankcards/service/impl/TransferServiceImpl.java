@@ -51,9 +51,9 @@ public class TransferServiceImpl implements TransferService {
     private void validateForTransfer(User user, Card outCard, Card inCard, Integer summa) {
         if (!user.getId().equals(outCard.getUser().getId()) || !user.getId().equals(inCard.getUser().getId())) {
             throw new AccessException("Вы не являетесь владельцем этих карт, в переводе - отказано.");
-        } else if (outCard.getStatus()!= StatusCard.ACTIVE || inCard.getStatus()!=StatusCard.ACTIVE) {
+        } else if (outCard.getStatus() != StatusCard.ACTIVE || inCard.getStatus() != StatusCard.ACTIVE) {
             throw new IncorrectException("Проверьте чтоб карты, которые вы хотите использовать, были активны.");
-        } else if (outCard.getBalance() < summa){
+        } else if (outCard.getBalance() < summa) {
             throw new IncorrectException("На карте недостаточно денег для списания");
         }
     }

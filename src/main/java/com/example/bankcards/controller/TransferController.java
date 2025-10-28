@@ -30,10 +30,10 @@ public class TransferController {
         return null;
     }
 
-    @GetMapping("/admin/all") //admin
+    @GetMapping("/all/admin") //admin
     public TransferDto getTransferAll(
-                                   @RequestParam(defaultValue = "0") Integer from,
-                                   @RequestParam(defaultValue = "10") Integer size) { //По id, фильтр по дате
+            @RequestParam(defaultValue = "0") Integer from,
+            @RequestParam(defaultValue = "10") Integer size) { //По id, фильтр по дате
         return null;
     }
 

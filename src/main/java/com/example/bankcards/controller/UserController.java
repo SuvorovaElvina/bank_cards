@@ -11,41 +11,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
-    @PostMapping//user
+    @PostMapping("/user")//user
     @ResponseStatus(HttpStatus.CREATED)
     public UserDto createUser(@Valid @RequestBody UserDto userDto) {
         return userService.registry(userDto);
     }
 
-    @GetMapping("/admin") //admin
+    @GetMapping("/admin/user") //admin
     public List<UserDto> getUsers(@RequestParam(required = false) List<Long> cardsId,
                                   @RequestParam(defaultValue = "0") Integer from,
-                                  @RequestParam(defaultValue = "10") Integer size) { //По id, фильтр и постраничный вывод
+                                  @RequestParam(defaultValue = "10") Integer size) {
         return userService.getAllById(cardsId, from, size);
     }
 
-    @PutMapping("/{userId}") //user
+    @PutMapping("/user/{userId}") //user
     public UserDto updateUser(@PathVariable @Positive Long userId, @RequestBody UserDto userDto) {
-        return userService.updateById(userId, userDto); //изменение имени
+        return userService.updateById(userId, userDto);
     }
 
-    @PutMapping("/admin") //admin
+    @PutMapping("/admin/user") //admin
     public List<UserDto> updateUser(@RequestParam List<Long> usersId) {
-        return userService.update(usersId); //изменение имени
+        return userService.update(usersId);
     }
 
-    @DeleteMapping("/{userId}") //user
+    @DeleteMapping("/user/{userId}") //user
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable @Positive Long userId) {
         userService.delete(userId);
     }
 
-    @DeleteMapping("/admin")
+    @DeleteMapping("/admin/user")
     @ResponseStatus(HttpStatus.NO_CONTENT) //admin
     public void deleteUserById(@RequestParam List<Long> usersId) {
         userService.deleteAllUserById(usersId);
